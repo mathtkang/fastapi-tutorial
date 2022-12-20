@@ -70,6 +70,7 @@ UserInDB(
 )  # result
 
 # 3. A Pydantic model from the contents of another
+hashed_password = fake_password_hasher(user_in.password)
 UserInDB(**user_in.dict(), hashed_password=hashed_password) # writing
 UserInDB(
     username = user_dict["username"],
