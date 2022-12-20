@@ -3,29 +3,27 @@ from pydantic import BaseModel, EmailStr
 
 app = FastAPI()
 
+class UserBase(BaseModel):
+    '''Reduce duplication'''
+    username: str
+    email: EmailStr
+    full_name: str | None = None
+
 
 class UserIn(BaseModel):
     # Input model : be able to have a password
-    username: str
     password: str
-    email: EmailStr
-    full_name: str | None = None
 
 
 class UserOut(BaseModel):
     # output model : should not have a password
-    username: str
-    email: EmailStr
-    full_name: str | None = None
+    pass
 
 
 class UserInDB(BaseModel):
     # database model : probably need to have a hashed password
-    username: str
     hashed_password: str
-    email: EmailStr
-    full_name: str | None = None
-
+    
 
 def fake_password_hasher(raw_password: str):
     return "supersecret" + raw_password
