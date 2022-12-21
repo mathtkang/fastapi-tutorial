@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import HTMLResponse
 
 app = FastAPI()
@@ -15,6 +15,21 @@ async def create_file(
         "file_sizes": [len(file) for file in files]
     }
 
+@app.post("/files_and_forms/")
+async def create_file_and_form(
+    file: bytes = File(), 
+    fileb: UploadFile = File(), 
+    token: str = Form()
+):
+    return {
+        "file_size": len(file),
+        "token": token,
+        "fileb_content_type": fileb.content_type,
+    }
+'''
+Use 'File' and 'Form' together 
+when you need to receive 'data and files' in the same request.
+'''
 
 @app.post("/uploadfile/")
 async def create_upload_file(
