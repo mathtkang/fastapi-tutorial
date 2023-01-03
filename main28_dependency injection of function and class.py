@@ -69,7 +69,7 @@ async def verify_token(x_token: str = Header()):
 async def verify_key(x_key: str = Header()):
     if x_key != "fake-super-secret-key":
         raise HTTPException(status_code=400, detail="X-Key header invalid")
-    return x_key
+    return x_key  # but this return value is not passed to path operation decorator
 
 
 @app.get("/items/", dependencies=[Depends(verify_token), Depends(verify_key)])
