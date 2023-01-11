@@ -1,5 +1,5 @@
 .python-version
-/poetry.lock
+poetry.lock
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/linux,python
